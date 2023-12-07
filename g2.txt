@@ -1,0 +1,34 @@
+program statement-list statement statement-simple iostatement input-statement output-statement declaration-statement type type-basic array array-accessing key assignment-statement variable expression operator add-or-substract multiply-or-divide term factor if-statement while-statement condition relation letter digit nonzerodigit integer string character
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 + - * / % < > <= >= = [ ] ( ) { } : ; , ' " integer string IF scanf printf WHILE BEGIN END
+program
+program -> BEGIN statement-list END
+statement-list -> statement ; | statement ; statement-list
+statement -> statement-simple | statement-structured
+statement-simple -> declaration-statement | assignment-statement | iostatement
+iostatement -> input-statement | output-statement
+input-statement -> scanf ( variable )
+output-statement -> printf ( expression )
+declaration-statement -> type identifier
+type -> type-basic | array
+type-basic -> char | int | string
+array -> type-basic [ number ]
+array-accessing -> identifier [ key ]
+key -> number | identifier
+assignment-statement  -> variable = expression
+variable -> identifier | array-accessing
+expression -> expression operator term | term
+operator -> add-or-substract | multiply-or-divide
+add-or-substract -> + | -
+multiply-or-divide -> * | / | %
+term -> term operator factor | factor
+factor  -> variable | constant | ( expression )
+if-statement  -> IF ( condition ) { statement-list }
+while-statement  -> WHILE ( condition ) { statement-list }
+condition  -> expression relation expression
+relation  -> < | > | >= | <=
+letter -> A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
+nonzerodigit -> 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+digit -> 0 | nonzerodigit
+integer ->  + nonzerodigit | - nonzerodigit | digit
+string -> char | char string
+character -> letter | digit
