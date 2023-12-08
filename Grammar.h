@@ -30,7 +30,7 @@ private:
     std::set<std::string> nonterminals;
     std::set<std::string> terminals;
     std::map<std::string, std::set<std::string>> productions;
-    std::string initialState;
+    std::string startingSymbol;
 
     static const std::string EPSILON;
 

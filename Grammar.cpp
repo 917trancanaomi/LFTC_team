@@ -52,8 +52,8 @@ void Grammar::productionsForSpecificNonterminal(const std::string& nonterminal) 
 }
 
 bool Grammar::checkIfCFG() const {
-    if (nonterminals.find(initialState) == nonterminals.end()) {
-        std::cerr << "Invalid initial state: " << initialState << std::endl;
+    if (nonterminals.find(startingSymbol) == nonterminals.end()) {
+        std::cerr << "Invalid starting symbol: " << startingSymbol << std::endl;
         return false;
     }
 
@@ -135,19 +135,19 @@ void Grammar::processProductions(std::ifstream& reader) {
 
         if (!productionSymbols.empty()) {
             productions[nonterminal] = std::set<std::string>(productionSymbols.begin(), productionSymbols.end());
-            nonterminals.insert(nonterminal);
+//            nonterminals.insert(nonterminal);
 
-            // Set initial state if not set
-            if (initialState.empty()) {
-                initialState = nonterminal;
-            }
+//            // Set initial state if not set
+//            if (startingSymbol.empty()) {
+//                startingSymbol = nonterminal;
+//            }
         }
     }
 }
 
 void Grammar::processInitialState(std::ifstream& reader) {
-    std::getline(reader, initialState);
-    initialState = trim(initialState);
+    std::getline(reader, startingSymbol);
+    startingSymbol = trim(startingSymbol);
 }
 
 std::vector<std::string> Grammar::splitString(const std::string& str, char delimiter) {
