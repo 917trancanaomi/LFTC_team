@@ -1,4 +1,4 @@
-program statement-list statement statement-simple iostatement input-statement output-statement declaration-statement type type-basic array array-accessing key assignment-statement variable expression operator add-or-substract multiply-or-divide term factor if-statement while-statement condition relation letter digit nonzerodigit integer string character
+program statement-list statement statement-simple iostatement input-statement output-statement declaration-statement type type-basic array array-accessing key assignment-statement variable expression operator add-or-substract multiply-or-divide term factor if-statement while-statement condition relation letter digit nonzerodigit integer string character constant_string constant_character
 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 + - * / % < > <= >= = [ ] ( ) { } : ; , ' " integer string IF scanf printf WHILE BEGIN END
 program
 program -> BEGIN statement-list END
@@ -30,5 +30,7 @@ letter -> A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R 
 nonzerodigit -> 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 digit -> 0 | nonzerodigit
 integer ->  + nonzerodigit | - nonzerodigit | digit
-string -> char | char string
+string -> character | character string
 character -> letter | digit
+constant_string -> " string "
+constant_character -> ' character '

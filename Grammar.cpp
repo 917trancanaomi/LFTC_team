@@ -60,7 +60,7 @@ bool Grammar::checkIfCFG() const {
     for (const auto& entry : productions) {
         const std::string& leftHandSide = entry.first;
         const auto& productionSet = entry.second;
-
+        std::cout<<leftHandSide<<"\n";
         std::vector<std::string> nonterminalsOnLeft = splitString(leftHandSide, ' ');
 
         if (nonterminalsOnLeft.size() != 1) {
@@ -106,17 +106,21 @@ void Grammar::processTerminals(std::ifstream& reader) {
 
 void Grammar::processProductions(std::ifstream& reader) {
     std::string productionLine;
+
     while (std::getline(reader, productionLine)) {
         std::istringstream iss(productionLine);
         std::string nonterminal;
-        iss >> nonterminal;
+//        iss >> nonterminal;
+//
+//        if (nonterminal.empty()) {
+//            continue;
+//        }
 
-        if (nonterminal.empty()) {
-            continue;
-        }
-
-        std::string separator;
-        iss >> separator; // "->"
+        std::getline(iss, nonterminal, '>');
+        nonterminal = nonterminal.substr(0, nonterminal.find('-'));
+//
+//        std::string separator;
+//        iss >> separator; // "->"
 
         std::vector<std::string> productionSymbols;
         std::string productionsStr;
@@ -127,14 +131,6 @@ void Grammar::processProductions(std::ifstream& reader) {
         while (std::getline(productionsStream, production, '|')) {
             production = trim(production);
             productionSymbols.push_back(production);
-
-            std::istringstream symbolsStream(production);
-            std::string symbol;
-            while (symbolsStream >> symbol) {
-                if (terminals.find(symbol) == terminals.end() && !symbol.empty() && symbol != EPSILON) {
-                    terminals.insert(symbol);
-                }
-            }
         }
 
         if (!productionSymbols.empty()) {

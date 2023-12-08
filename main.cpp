@@ -4,7 +4,7 @@
 
 int main() {
     Grammar grammar;
-    grammar.readFromFile("C:\\Users\\Naomi\\Desktop\\University Year 3\\lftc\\LFTC_team\\g2.txt");
+    grammar.readFromFile("C:\\Users\\Naomi\\Desktop\\University Year 3\\lftc\\LFTC_team\\g.txt");
 
     int opt = -1;
     while (opt != 0) {
