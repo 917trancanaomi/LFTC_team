@@ -11,6 +11,7 @@
 #include <set>
 #include <map>
 #include <vector>
+#include "Production.h"
 
 class Grammar {
 public:
@@ -23,13 +24,13 @@ public:
     void productionsForSpecificNonterminal(const std::string& nonterminal) const;
     bool checkIfCFG() const;
 
-    template <typename T>
-    void printSet(const std::set<T>& s) const;
+    std::vector<Production> getProductionsForNonterminal(std::string nonterminal);
+
 
 private:
     std::set<std::string> nonterminals;
     std::set<std::string> terminals;
-    std::map<std::string, std::set<std::string>> productions;
+    std::map<std::string, std::vector<Production>> productions;
     std::string startingSymbol;
 
     static const std::string EPSILON;
@@ -38,11 +39,6 @@ private:
     void processTerminals(std::ifstream& reader);
     void processProductions(std::ifstream& reader);
     void processInitialState(std::ifstream& reader);
-
-    static std::vector<std::string> splitString(const std::string& str, char delimiter);
-    static std::set<std::string> splitStringToSet(const std::string& str, char delimiter);
-    static std::string trim(const std::string& str);
-    static std::string vectorToString(const std::set<std::string>& vec);
 
 };
 
