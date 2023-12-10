@@ -23,7 +23,8 @@ LR0::closure(const std::map<std::string, std::vector<Production>> &I, Grammar gr
                 std::vector<Production> currentProductions = grammar.getProductionsForNonterminal(nonTerminal);
 
                 for (const auto &smolprod: currentProductions) {
-                    if(std::find(output[nonTerminal].begin(), output[nonTerminal].end(), smolprod) == output[nonTerminal].end()){
+                    if (std::find(output[nonTerminal].begin(), output[nonTerminal].end(), smolprod) ==
+                        output[nonTerminal].end()) {
                         changed = true;
                         output[nonTerminal].push_back(smolprod);
                     }
@@ -35,4 +36,21 @@ LR0::closure(const std::map<std::string, std::vector<Production>> &I, Grammar gr
     } while (changed);
 
     return output;
+}
+
+std::map<std::string, std::vector<Production>>
+LR0::goTo(const std::map<std::string, std::vector<Production>> &I, Grammar grammar, std::string X) {
+    std::map<std::string, std::vector<Production>> output;
+
+    for (const auto &item: I) {
+        output[item.first] = std::vector<Production>();
+        for (Production prod: item.second) {
+            if (prod.getPointValue() == X) {
+                Production aux(prod);
+                aux.incrementPoint();
+                output[item.first].push_back(aux);
+            }
+        }
+    }
+    return closure(output, grammar);
 }

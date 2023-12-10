@@ -55,10 +55,10 @@ int main() {
     std::map<std::string, std::vector<Production>> input, output;
     input["S"] = std::vector<Production>();
     input["S"].push_back(Production("A 2"));
+    input["S"].push_back(Production("1"));
+    input["S"].push_back(Production("3"));
 
-    output = lr0.closure(input, grammar);
-
-
+    output = lr0.goTo(input, grammar, "A");
 
     return 0;
 }

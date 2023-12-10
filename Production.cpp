@@ -20,7 +20,7 @@ bool Production::operator!=(const Production &rhs) const {
 
 std::string Production::toString() const {
     std::string prod = "";
-    for (const auto &item: this->terms){
+    for (const auto &item: this->terms) {
         prod += item + " ";
     }
     return prod;
@@ -28,4 +28,22 @@ std::string Production::toString() const {
 
 std::string Production::getPointValue() const {
     return this->terms[this->pointIndex];
+}
+
+void Production::incrementPoint() {
+    if (!isPointAtEnd())
+        pointIndex++;
+}
+
+bool Production::isPointAtEnd() const {
+    return pointIndex == terms.size();
+}
+
+Production::Production(const Production &production) {
+    this->terms = production.terms;
+    this->pointIndex = production.pointIndex;
+}
+
+const std::vector<std::string> &Production::getTerms() const {
+    return terms;
 }

@@ -15,7 +15,7 @@ public:
     std::map<std::string, std::vector<Production>>
     closure(const std::map<std::string, std::vector<Production>>& I, Grammar grammar);
 
-    std::vector<Production> goTo(std::vector<Production>);
+    std::map<std::string, std::vector<Production>> goTo(const std::map<std::string, std::vector<Production>>& I, Grammar grammar, std::string X);
 
 };
 

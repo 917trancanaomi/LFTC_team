@@ -90,7 +90,7 @@ bool Grammar::checkIfCFG() const {
         }
 
         for (const Production &production: productionSet) {
-            for (const std::string &symbol: production.terms) {
+            for (const std::string &symbol: production.getTerms()) {
                 if (nonterminals.find(symbol) == nonterminals.end() &&
                     terminals.find(symbol) == terminals.end() &&
                     symbol != EPSILON) {

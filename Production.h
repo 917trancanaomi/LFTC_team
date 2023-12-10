@@ -11,13 +11,17 @@
 
 
 class Production {
-public:
     std::vector<std::string> terms;
     int pointIndex = 0;
+public:
 
     Production(){}
 
     Production(std::string value);
+
+    const std::vector<std::string> &getTerms() const;
+
+    Production(const Production& production);
 
     bool operator==(const Production &rhs) const;
 
@@ -26,6 +30,10 @@ public:
     std::string toString() const;
 
     std::string getPointValue() const;
+
+    void incrementPoint();
+
+    bool isPointAtEnd() const;
 
 
 };
