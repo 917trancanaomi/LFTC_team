@@ -54,7 +54,7 @@ void Grammar::productionsForSpecificNonterminal(const std::string &nonterminal) 
     if (it != productions.end()) {
         std::string val = "";
         for (int i = 0; i < it->second.size(); i++) {
-            val += it->second[i].toString() ;
+            val += it->second[i].toString();
             if (i < it->second.size() - 1)
                 val += "| ";
         }
@@ -154,8 +154,9 @@ void Grammar::processProductions(std::ifstream &reader) {
 }
 
 void Grammar::processInitialState(std::ifstream &reader) {
-    std::getline(reader, startingSymbol);
-    startingSymbol = Utils::trim(startingSymbol);
+    std::string startingSymbolLine;
+    std::getline(reader, startingSymbolLine);
+    startingSymbol = Utils::trim(startingSymbolLine);
 }
 
 std::vector<Production> Grammar::getProductionsForNonterminal(std::string nonterminal) {
@@ -163,6 +164,13 @@ std::vector<Production> Grammar::getProductionsForNonterminal(std::string nonter
     if (it != productions.end())
         return it->second;
     else return std::vector<Production>();
+}
+
+Grammar::Grammar(const Grammar &grammar) {
+    this->startingSymbol = grammar.startingSymbol;
+    this->nonterminals = grammar.nonterminals;
+    this->terminals = grammar.terminals;
+    this->productions = grammar.productions;
 }
 
 

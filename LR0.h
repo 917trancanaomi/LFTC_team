@@ -8,6 +8,7 @@
 
 #include "Production.h"
 #include "Grammar.h"
+#include "CanonicalCollection.h"
 
 class LR0 {
 
@@ -16,6 +17,10 @@ public:
     closure(const std::map<std::string, std::vector<Production>>& I, Grammar grammar);
 
     std::map<std::string, std::vector<Production>> goTo(const std::map<std::string, std::vector<Production>>& I, Grammar grammar, std::string X);
+    CanonicalCollection canonicalCollection(Grammar grammar);
+
+    //ParsingTable getParsingTable(const CanonicalCollection& canonicalCollection, const Grammar& grammar);
+
 
 };
 

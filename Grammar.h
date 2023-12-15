@@ -17,6 +17,8 @@ class Grammar {
 public:
     Grammar();
 
+    Grammar(const Grammar& grammar);
+
     void readFromFile(const std::string& filename);
     void printNonterminals() const;
     void printTerminals() const;
@@ -27,11 +29,12 @@ public:
     std::vector<Production> getProductionsForNonterminal(std::string nonterminal);
 
 
-private:
+    std::string startingSymbol;
     std::set<std::string> nonterminals;
     std::set<std::string> terminals;
+private:
+
     std::map<std::string, std::vector<Production>> productions;
-    std::string startingSymbol;
 
     static const std::string EPSILON;
 

@@ -12,4 +12,10 @@ add_executable(LFTC_team main.cpp
         Utils.h
         LR0.cpp
         LR0.h
+        CanonicalCollection.cpp
+        CanonicalCollection.h
+        State.cpp
+        ParsingTable.cpp
+        Item.cpp
+        Item.h
 )
