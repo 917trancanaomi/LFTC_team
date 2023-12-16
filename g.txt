@@ -1,6 +1,6 @@
-S1 S A
-0 1 2 3
-S1
-S1 -> S
-S -> 1 | A 2 | 3
-A -> 0 | A
+nonzerodigit digit sequence_of_digits
+0 1 2 3 4 5 6 7 8 9
+sequence_of_digits
+nonzerodigit -> 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+digit -> 0 | nonzerodigit
+sequence_of_digits -> digit | digit sequence_of_digits

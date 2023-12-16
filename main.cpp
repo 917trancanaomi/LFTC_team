@@ -35,11 +35,13 @@ int main() {
         std::cout << "3: List the productions" << std::endl;
         std::cout << "4: List productions for a given nonterminal" << std::endl;
         std::cout << "5: Check if CFG" << std::endl;
-        std::cout << "6: LR(0) Canonical Collection" << std::endl;
+        std::cout << "6: Canonical collection" << std::endl;
+        std::cout << "7: Create Parsing table" << std::endl;
         std::cout << "Enter option: ";
 
         try {
             std::cin >> opt;
+            LR0 lr0;
             switch (opt) {
                 case 1:
                     grammar.printNonterminals();
@@ -61,9 +63,14 @@ int main() {
                     std::cout << "Check if CFG: " << std::boolalpha << grammar.checkIfCFG() << std::endl;
                     break;
                 case 6: {
-                    LR0 lr0;
-                    CanonicalCollection canonicalCollection = lr0.canonicalCollection(grammar);
-                    printCanonicalCollection(canonicalCollection);
+                    Grammar expandedGrammar = grammar.createExpandedGrammar(grammar.startingSymbol + "PRIME");
+                    CanonicalCollection collection = lr0.canonicalCollection(expandedGrammar);
+                    printCanonicalCollection(collection);
+                    break;
+                }
+                case 7: {
+                    lr0.completeParsingTable(grammar);
+                    lr0.printParsingTable();
                     break;
                 }
                 case 0:

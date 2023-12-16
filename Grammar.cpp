@@ -74,7 +74,7 @@ bool Grammar::checkIfCFG() const {
     for (const auto &entry: productions) {
         const std::string &leftHandSide = entry.first;
         const auto &productionSet = entry.second;
-        std::cout << leftHandSide << "\n";
+//        std::cout << leftHandSide << "\n";
         std::vector<std::string> nonterminalsOnLeft = Utils::splitString(leftHandSide, ' ');
 
         if (nonterminalsOnLeft.size() != 1) {
@@ -135,6 +135,8 @@ void Grammar::processProductions(std::ifstream &reader) {
         std::string production;
         while (std::getline(productionsStream, production, '|')) {
             production = Utils::trim(production);
+            if (production == "")
+                production = EPSILON;
             Production aux(production);
             productionSymbols.push_back(aux);
         }
@@ -164,6 +166,14 @@ Grammar::Grammar(const Grammar &grammar) {
     this->nonterminals = grammar.nonterminals;
     this->terminals = grammar.terminals;
     this->productions = grammar.productions;
+}
+
+Grammar Grammar::createExpandedGrammar(std::string initialSymbol) {
+    Grammar newGrammar(*this);
+    Production aux(this->startingSymbol);
+    newGrammar.productions[initialSymbol].push_back(aux);
+    newGrammar.startingSymbol = initialSymbol;
+    return newGrammar;
 }
 
 

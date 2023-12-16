@@ -152,19 +152,19 @@ CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\UniversityWork\LFTC_team\CanonicalCollection.cpp -o CMakeFiles\LFTC_team.dir\CanonicalCollection.cpp.s
 
-CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj: CMakeFiles/LFTC_team.dir/flags.make
-CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj: D:/UniversityWork/LFTC_team/ParsingTable.cpp
-CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj: CMakeFiles/LFTC_team.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\UniversityWork\LFTC_team\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj -MF CMakeFiles\LFTC_team.dir\ParsingTable.cpp.obj.d -o CMakeFiles\LFTC_team.dir\ParsingTable.cpp.obj -c D:\UniversityWork\LFTC_team\ParsingTable.cpp
+CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj: CMakeFiles/LFTC_team.dir/flags.make
+CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj: D:/UniversityWork/LFTC_team/ParseOutput.cpp
+CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj: CMakeFiles/LFTC_team.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\UniversityWork\LFTC_team\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj -MF CMakeFiles\LFTC_team.dir\ParseOutput.cpp.obj.d -o CMakeFiles\LFTC_team.dir\ParseOutput.cpp.obj -c D:\UniversityWork\LFTC_team\ParseOutput.cpp
 
-CMakeFiles/LFTC_team.dir/ParsingTable.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LFTC_team.dir/ParsingTable.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\UniversityWork\LFTC_team\ParsingTable.cpp > CMakeFiles\LFTC_team.dir\ParsingTable.cpp.i
+CMakeFiles/LFTC_team.dir/ParseOutput.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LFTC_team.dir/ParseOutput.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\UniversityWork\LFTC_team\ParseOutput.cpp > CMakeFiles\LFTC_team.dir\ParseOutput.cpp.i
 
-CMakeFiles/LFTC_team.dir/ParsingTable.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LFTC_team.dir/ParsingTable.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\UniversityWork\LFTC_team\ParsingTable.cpp -o CMakeFiles\LFTC_team.dir\ParsingTable.cpp.s
+CMakeFiles/LFTC_team.dir/ParseOutput.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LFTC_team.dir/ParseOutput.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\UniversityWork\LFTC_team\ParseOutput.cpp -o CMakeFiles\LFTC_team.dir\ParseOutput.cpp.s
 
 # Object files for target LFTC_team
 LFTC_team_OBJECTS = \
@@ -174,7 +174,7 @@ LFTC_team_OBJECTS = \
 "CMakeFiles/LFTC_team.dir/Utils.cpp.obj" \
 "CMakeFiles/LFTC_team.dir/LR0.cpp.obj" \
 "CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.obj" \
-"CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj"
+"CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj"
 
 # External object files for target LFTC_team
 LFTC_team_EXTERNAL_OBJECTS =
@@ -185,7 +185,7 @@ LFTC_team.exe: CMakeFiles/LFTC_team.dir/Production.cpp.obj
 LFTC_team.exe: CMakeFiles/LFTC_team.dir/Utils.cpp.obj
 LFTC_team.exe: CMakeFiles/LFTC_team.dir/LR0.cpp.obj
 LFTC_team.exe: CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.obj
-LFTC_team.exe: CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj
+LFTC_team.exe: CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj
 LFTC_team.exe: CMakeFiles/LFTC_team.dir/build.make
 LFTC_team.exe: CMakeFiles/LFTC_team.dir/linkLibs.rsp
 LFTC_team.exe: CMakeFiles/LFTC_team.dir/objects1.rsp

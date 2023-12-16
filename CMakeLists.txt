@@ -14,5 +14,6 @@ add_executable(LFTC_team main.cpp
         LR0.h
         CanonicalCollection.cpp
         CanonicalCollection.h
-        ParsingTable.cpp
+        ParseOutput.cpp
+        ParseOutput.h
 )

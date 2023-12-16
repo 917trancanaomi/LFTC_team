@@ -17,31 +17,42 @@ class Grammar {
 public:
     Grammar();
 
-    Grammar(const Grammar& grammar);
+    Grammar(const Grammar &grammar);
 
-    void readFromFile(const std::string& filename);
+    void readFromFile(const std::string &filename);
+
     void printNonterminals() const;
+
     void printTerminals() const;
+
     void printProductions() const;
-    void productionsForSpecificNonterminal(const std::string& nonterminal) const;
+
+    void productionsForSpecificNonterminal(const std::string &nonterminal) const;
+
     bool checkIfCFG() const;
 
     std::vector<Production> getProductionsForNonterminal(std::string nonterminal);
+
+    Grammar createExpandedGrammar(std::string initialSymbol);
 
 
     std::string startingSymbol;
     std::set<std::string> nonterminals;
     std::set<std::string> terminals;
+    std::map<std::string, std::vector<Production>> productions;
+
 private:
 
-    std::map<std::string, std::vector<Production>> productions;
 
     static const std::string EPSILON;
 
-    void processNonterminals(std::ifstream& reader);
-    void processTerminals(std::ifstream& reader);
-    void processProductions(std::ifstream& reader);
-    void processInitialState(std::ifstream& reader);
+    void processNonterminals(std::ifstream &reader);
+
+    void processTerminals(std::ifstream &reader);
+
+    void processProductions(std::ifstream &reader);
+
+    void processInitialState(std::ifstream &reader);
 
 };
 

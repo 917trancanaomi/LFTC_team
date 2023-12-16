@@ -100,7 +100,10 @@
 		<Unit filename="D:/UniversityWork/LFTC_team/LR0.h">
 			<Option target="LFTC_team"/>
 		</Unit>
-		<Unit filename="D:/UniversityWork/LFTC_team/ParsingTable.cpp">
+		<Unit filename="D:/UniversityWork/LFTC_team/ParseOutput.cpp">
+			<Option target="LFTC_team"/>
+		</Unit>
+		<Unit filename="D:/UniversityWork/LFTC_team/ParseOutput.h">
 			<Option target="LFTC_team"/>
 		</Unit>
 		<Unit filename="D:/UniversityWork/LFTC_team/Production.cpp">

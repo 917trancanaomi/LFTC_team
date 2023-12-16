@@ -10,8 +10,9 @@ Production::Production(std::string value) {
 }
 
 bool Production::operator==(const Production &rhs) const {
-    return terms == rhs.terms &&
-           pointIndex == rhs.pointIndex;
+    bool value = terms == rhs.terms &&
+                 pointIndex == rhs.pointIndex;
+    return value;
 }
 
 bool Production::operator!=(const Production &rhs) const {

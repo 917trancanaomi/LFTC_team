@@ -200,29 +200,29 @@ LR0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/LR0.cpp.s
 .PHONY : LR0.cpp.s
 
-ParsingTable.obj: ParsingTable.cpp.obj
-.PHONY : ParsingTable.obj
+ParseOutput.obj: ParseOutput.cpp.obj
+.PHONY : ParseOutput.obj
 
 # target to build an object file
-ParsingTable.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj
-.PHONY : ParsingTable.cpp.obj
+ParseOutput.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParseOutput.cpp.obj
+.PHONY : ParseOutput.cpp.obj
 
-ParsingTable.i: ParsingTable.cpp.i
-.PHONY : ParsingTable.i
+ParseOutput.i: ParseOutput.cpp.i
+.PHONY : ParseOutput.i
 
 # target to preprocess a source file
-ParsingTable.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParsingTable.cpp.i
-.PHONY : ParsingTable.cpp.i
+ParseOutput.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParseOutput.cpp.i
+.PHONY : ParseOutput.cpp.i
 
-ParsingTable.s: ParsingTable.cpp.s
-.PHONY : ParsingTable.s
+ParseOutput.s: ParseOutput.cpp.s
+.PHONY : ParseOutput.s
 
 # target to generate assembly for a file
-ParsingTable.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParsingTable.cpp.s
-.PHONY : ParsingTable.cpp.s
+ParseOutput.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParseOutput.cpp.s
+.PHONY : ParseOutput.cpp.s
 
 Production.obj: Production.cpp.obj
 .PHONY : Production.obj
@@ -314,9 +314,9 @@ help:
 	@echo ... LR0.obj
 	@echo ... LR0.i
 	@echo ... LR0.s
-	@echo ... ParsingTable.obj
-	@echo ... ParsingTable.i
-	@echo ... ParsingTable.s
+	@echo ... ParseOutput.obj
+	@echo ... ParseOutput.i
+	@echo ... ParseOutput.s
 	@echo ... Production.obj
 	@echo ... Production.i
 	@echo ... Production.s
