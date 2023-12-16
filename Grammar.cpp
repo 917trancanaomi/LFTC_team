@@ -122,17 +122,10 @@ void Grammar::processProductions(std::ifstream &reader) {
     while (std::getline(reader, productionLine)) {
         std::istringstream iss(productionLine);
         std::string nonterminal;
-//        iss >> nonterminal;
-//
-//        if (nonterminal.empty()) {
-//            continue;
-//        }
+
 
         std::getline(iss, nonterminal, '>');
         nonterminal = nonterminal.substr(0, nonterminal.find('-') - 1);
-//
-//        std::string separator;
-//        iss >> separator; // "->"
 
         std::vector<Production> productionSymbols;
         std::string productionsStr;

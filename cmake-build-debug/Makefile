@@ -128,6 +128,30 @@ LFTC_team/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/build
 .PHONY : LFTC_team/fast
 
+CanonicalCollection.obj: CanonicalCollection.cpp.obj
+.PHONY : CanonicalCollection.obj
+
+# target to build an object file
+CanonicalCollection.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.obj
+.PHONY : CanonicalCollection.cpp.obj
+
+CanonicalCollection.i: CanonicalCollection.cpp.i
+.PHONY : CanonicalCollection.i
+
+# target to preprocess a source file
+CanonicalCollection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.i
+.PHONY : CanonicalCollection.cpp.i
+
+CanonicalCollection.s: CanonicalCollection.cpp.s
+.PHONY : CanonicalCollection.s
+
+# target to generate assembly for a file
+CanonicalCollection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.s
+.PHONY : CanonicalCollection.cpp.s
+
 Grammar.obj: Grammar.cpp.obj
 .PHONY : Grammar.obj
 
@@ -175,6 +199,30 @@ LR0.s: LR0.cpp.s
 LR0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/LR0.cpp.s
 .PHONY : LR0.cpp.s
+
+ParsingTable.obj: ParsingTable.cpp.obj
+.PHONY : ParsingTable.obj
+
+# target to build an object file
+ParsingTable.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj
+.PHONY : ParsingTable.cpp.obj
+
+ParsingTable.i: ParsingTable.cpp.i
+.PHONY : ParsingTable.i
+
+# target to preprocess a source file
+ParsingTable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParsingTable.cpp.i
+.PHONY : ParsingTable.cpp.i
+
+ParsingTable.s: ParsingTable.cpp.s
+.PHONY : ParsingTable.s
+
+# target to generate assembly for a file
+ParsingTable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LFTC_team.dir\build.make CMakeFiles/LFTC_team.dir/ParsingTable.cpp.s
+.PHONY : ParsingTable.cpp.s
 
 Production.obj: Production.cpp.obj
 .PHONY : Production.obj
@@ -257,12 +305,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... LFTC_team
+	@echo ... CanonicalCollection.obj
+	@echo ... CanonicalCollection.i
+	@echo ... CanonicalCollection.s
 	@echo ... Grammar.obj
 	@echo ... Grammar.i
 	@echo ... Grammar.s
 	@echo ... LR0.obj
 	@echo ... LR0.i
 	@echo ... LR0.s
+	@echo ... ParsingTable.obj
+	@echo ... ParsingTable.i
+	@echo ... ParsingTable.s
 	@echo ... Production.obj
 	@echo ... Production.i
 	@echo ... Production.s

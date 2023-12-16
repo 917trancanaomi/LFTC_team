@@ -1,8 +1,12 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.obj"
+  "CMakeFiles/LFTC_team.dir/CanonicalCollection.cpp.obj.d"
   "CMakeFiles/LFTC_team.dir/Grammar.cpp.obj"
   "CMakeFiles/LFTC_team.dir/Grammar.cpp.obj.d"
   "CMakeFiles/LFTC_team.dir/LR0.cpp.obj"
   "CMakeFiles/LFTC_team.dir/LR0.cpp.obj.d"
+  "CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj"
+  "CMakeFiles/LFTC_team.dir/ParsingTable.cpp.obj.d"
   "CMakeFiles/LFTC_team.dir/Production.cpp.obj"
   "CMakeFiles/LFTC_team.dir/Production.cpp.obj.d"
   "CMakeFiles/LFTC_team.dir/Utils.cpp.obj"

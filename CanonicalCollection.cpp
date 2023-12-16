@@ -22,3 +22,18 @@ bool CanonicalCollection::stateExists(const std::map<std::string, std::vector<Pr
     }
     return false;
 }
+
+CanonicalCollection::CanonicalCollection(const CanonicalCollection &collection) {
+    this->states.clear();
+    std::for_each(collection.states.begin(), collection.states.end(), [this](auto a) { this->states.push_back(a); });
+}
+
+CanonicalCollection::CanonicalCollection() {
+    this->states.clear();
+}
+
+CanonicalCollection& CanonicalCollection::operator=(const CanonicalCollection &rhs) {
+    this->states.clear();
+    std::for_each(rhs.states.begin(), rhs.states.end(), [this](auto a) { this->states.push_back(a); });
+    return *this;
+}

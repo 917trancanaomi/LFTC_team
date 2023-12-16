@@ -47,3 +47,14 @@ Production::Production(const Production &production) {
 const std::vector<std::string> &Production::getTerms() const {
     return terms;
 }
+
+std::ostream &operator<<(std::ostream &os, const Production &production) {
+    for (int i = 0; i < production.terms.size(); i++) {
+        if (production.pointIndex == i)
+            os << ".";
+        os << production.terms[i];
+    }
+    if (production.isPointAtEnd())
+        os << ".";
+    return os;
+}

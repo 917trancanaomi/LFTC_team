@@ -23,6 +23,6 @@ public:
 
 private:
     std::map<std::string, std::map<std::string, std::string>> table;
-    // You might want to use appropriate data structures based on your LR(0) parser implementation
-};
 
+
+};

@@ -3,19 +3,20 @@
 #include "Grammar.h"
 #include "LR0.h"
 
-void printCanonicalCollection(const CanonicalCollection& canonicalCollection) {
-    const auto& states = canonicalCollection.getStates();
+void printCanonicalCollection(const CanonicalCollection &canonicalCollection) {
+    const auto &states = canonicalCollection.getStates();
     for (size_t i = 0; i < states.size(); ++i) {
         std::cout << "State " << i << ":\n";
-        const auto& state = states[i];
-        for (const auto& item : state) {
-            const std::string& nonterminal = item.first;
-            const auto& productions = item.second;
-            std::cout << nonterminal << " -> ";
-            for (const auto& production : productions) {
-                std::cout << production.toString() << " | ";
+        const auto &state = states[i];
+        for (const auto &item: state) {
+            const std::string &nonterminal = item.first;
+            const auto &productions = item.second;
+
+            for (const auto &production: productions) {
+                std::cout << nonterminal << " -> ";
+                std::cout << production;
+                std::cout << "\n";
             }
-            std::cout << "\n";
         }
         std::cout << "\n";
     }
@@ -23,7 +24,7 @@ void printCanonicalCollection(const CanonicalCollection& canonicalCollection) {
 
 int main() {
     Grammar grammar;
-    grammar.readFromFile("C:\\Users\\Naomi\\Desktop\\University Year 3\\lftc\\LFTC_team\\ga.txt");
+    grammar.readFromFile("D:\\UniversityWork\\LFTC_team\\ga.txt");
 
     int opt = -1;
     while (opt != 0) {
@@ -72,18 +73,10 @@ int main() {
                     std::cout << "Invalid option" << std::endl;
                     break;
             }
-        } catch (const std::exception& e) {
+        } catch (const std::exception &e) {
             std::cerr << "Exception: " << e.what() << std::endl;
         }
     }
-//    LR0 lr0;
-//    std::map<std::string, std::vector<Production>> input, output;
-//    input["S"] = std::vector<Production>();
-//    input["S"].push_back(Production("A 2"));
-//    input["S"].push_back(Production("1"));
-//    input["S"].push_back(Production("3"));
-//
-//    output = lr0.goTo(input, grammar, "A");
 
     return 0;
 }

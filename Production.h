@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <string>
+#include <ostream>
 
 
 class Production {
@@ -35,6 +36,7 @@ public:
 
     bool isPointAtEnd() const;
 
+    friend std::ostream &operator<<(std::ostream &os, const Production &production);
 
 };
 

@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/UniversityWork/LFTC_team/CanonicalCollection.cpp">
+			<Option target="LFTC_team"/>
+		</Unit>
+		<Unit filename="D:/UniversityWork/LFTC_team/CanonicalCollection.h">
+			<Option target="LFTC_team"/>
+		</Unit>
 		<Unit filename="D:/UniversityWork/LFTC_team/Grammar.cpp">
 			<Option target="LFTC_team"/>
 		</Unit>
@@ -92,6 +98,9 @@
 			<Option target="LFTC_team"/>
 		</Unit>
 		<Unit filename="D:/UniversityWork/LFTC_team/LR0.h">
+			<Option target="LFTC_team"/>
+		</Unit>
+		<Unit filename="D:/UniversityWork/LFTC_team/ParsingTable.cpp">
 			<Option target="LFTC_team"/>
 		</Unit>
 		<Unit filename="D:/UniversityWork/LFTC_team/Production.cpp">
