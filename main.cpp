@@ -24,7 +24,7 @@ void printCanonicalCollection(const CanonicalCollection &canonicalCollection) {
 
 int main() {
     Grammar grammar;
-    grammar.readFromFile("D:\\UniversityWork\\LFTC_team\\ga.txt");
+    grammar.readFromFile("D:\\UniversityWork\\LFTC_team\\g2.txt");
 
     int opt = -1;
     while (opt != 0) {
@@ -69,8 +69,8 @@ int main() {
                     break;
                 }
                 case 7: {
-                    lr0.completeParsingTable(grammar);
-                    lr0.printParsingTable();
+                    if (lr0.completeParsingTable(grammar))
+                        lr0.printParsingTable();
                     break;
                 }
                 case 0:

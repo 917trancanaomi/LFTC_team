@@ -39,7 +39,7 @@ public:
     int goToNextState(CanonicalCollection canonicalCollection, std::map<std::string, std::vector<Production>> state,
                       Grammar grammar, std::string element);
 
-    void completeParsingTable(Grammar grammar);
+    bool completeParsingTable(Grammar grammar);
 
     void printParsingTable();
 
