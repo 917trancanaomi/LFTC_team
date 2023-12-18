@@ -34,7 +34,7 @@ public:
     CanonicalCollection canonicalCollection(Grammar grammar);
 
     std::string
-    action(std::map<std::string, std::vector<Production>> state, Grammar grammar);
+    action(std::map<std::string, std::vector<Production>> state, Grammar grammar, int i);
 
     int goToNextState(CanonicalCollection canonicalCollection, std::map<std::string, std::vector<Production>> state,
                       Grammar grammar, std::string element);
@@ -42,6 +42,18 @@ public:
     void completeParsingTable(Grammar grammar);
 
     void printParsingTable();
+
+    /*
+     * deci aici se va face parsarea unei secvente
+     * ma gandesc ca o secventa trebuie citita cumva dar mno ca la gramatici doar cu litere e chill
+     * dar cand va fi cu PIF o sa fie tare urat, desi ma gandesc ca putem sa il intrebam pe prof exact
+     * cum.
+     * Aici daca se incearca accesarea unui lucru care nu este in map trebuie sa spui ca nu e o secventa
+     * acceptata => poti returna vectorul cu un singur element (-1)  ++++ trebuie afisat locul/unde crapa
+     * ori simbolul/productia ori ceva de acolo
+     * basically trebuie implementat exact ce am facut la seminar si are si profa explicatii
+     */
+    std::vector<int> parseSequence(Grammar grammar);
 
 };
 

@@ -110,7 +110,7 @@ CanonicalCollection LR0::canonicalCollection(Grammar grammar) {
 }
 
 std::string
-LR0::action(std::map<std::string, std::vector<Production>> state, Grammar grammar) {
+LR0::action(std::map<std::string, std::vector<Production>> state, Grammar grammar, int i) {
     std::string value = "";
     for (const auto &currentNonterminal: state) {
         //parsing all items
@@ -138,12 +138,12 @@ LR0::action(std::map<std::string, std::vector<Production>> state, Grammar gramma
                     }
                     value += " " + std::to_string(count);
                 } else if (value == SHIFT) {
-                    std::cerr << "SHIFT REDUCE CONFLICT! " << currentProduction << " " << std::endl;
+                    std::cerr << "SHIFT REDUCE CONFLICT! State" << i << " " << std::endl;
                 } else {
-                    std::cerr << "REDUCE REDUCE CONFLICT!" << std::endl;
+                    std::cerr << "REDUCE REDUCE CONFLICT! State" << i << " " << std::endl;
                 }
             } else if (value == REDUCE) {
-                std::cerr << "SHIFT REDUCE CONFLICT!" << std::endl;
+                std::cerr << "SHIFT REDUCE CONFLICT! State" << i << " " << std::endl;
             } else {
                 value = SHIFT;
             }
@@ -174,7 +174,7 @@ void LR0::completeParsingTable(Grammar grammar) {
 
     for (int i = 0; i < expandedGrammarCanonicalCollection.states.size(); i++) {
         auto state = expandedGrammarCanonicalCollection.states[i];
-        std::string currentAction = action(state, expandedGrammar);
+        std::string currentAction = action(state, expandedGrammar, i);
 
         this->parsingTable[i].first = currentAction;
         if (currentAction == SHIFT) {
@@ -209,5 +209,9 @@ void LR0::printParsingTable() {
         std::cout << std::endl;
     }
 
+}
+
+std::vector<int> LR0::parseSequence(Grammar grammar) {
+    return std::vector<int>();
 }
 
