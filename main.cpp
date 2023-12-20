@@ -38,7 +38,8 @@ int main() {
         std::cout << "5: Check if CFG" << std::endl;
         std::cout << "6: Canonical collection" << std::endl;
         std::cout << "7: Create Parsing table" << std::endl;
-        std::cout << "8: Test ParseOutput with 133" << std::endl;
+        std::cout << "8: Test ParseOutput" << std::endl;
+        std::cout << "9: Test parsing sequence" << std::endl;
         std::cout << "Enter option: ";
 
         try {
@@ -85,6 +86,21 @@ int main() {
                     prods.push_back(1);
                     prods.push_back(2);
                     parseOutput.populateTableFromProductionString(prods, grammar);
+                    std::cout << parseOutput << std::endl;
+                }
+                case 9: {
+                    std::vector<std::string> inputSequence;
+                    inputSequence.emplace_back("a");
+                    inputSequence.emplace_back("b");
+                    inputSequence.emplace_back("b");
+                    inputSequence.emplace_back("c");
+                    Grammar expandedGrammar = grammar.createExpandedGrammar(grammar.startingSymbol + "PRIME");
+                    CanonicalCollection collection = lr0.canonicalCollection(expandedGrammar);
+                    lr0.completeParsingTable(grammar);
+                    std::vector<int> result = lr0.parseSequence(inputSequence, expandedGrammar, collection);
+                    std::cout << "aici" << std::endl;
+                    ParseOutput parseOutput;
+                    parseOutput.populateTableFromProductionString(result, grammar);
                     std::cout << parseOutput << std::endl;
                 }
                 case 0:

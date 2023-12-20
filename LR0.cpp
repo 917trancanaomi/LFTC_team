@@ -253,25 +253,66 @@ LR0::parseSequence(std::vector<std::string> inputStack, Grammar grammar, Canonic
                         std::cerr << inputStack[j] << " ";
                     }
                     std::cerr << std::endl;
-                    break;
+                    std::vector<int> err;
+                    err.push_back(-1);
+                    return err;
                 }
 
                 posInput++;
             } else {
                 //in the reduce case
                 //get the production number;
-                int productionNr = atoi(strchr(action.c_str(), ' ')+1);
+                int productionNr = atoi(strchr(action.c_str(), ' ') + 1);
 
                 outputStack.push(productionNr);
 
                 //popping stuff from the workstack
 
+                auto currProd = numberedProductions[productionNr - 1];
 
+                auto production = currProd.second;
+                for (int j = production.getTerms().size() - 1; j >= 0; j--) {
+                    //pop the state
+                    workStack.pop();
+                    //pop the element
+                    workStack.pop();
+                }
+
+                bool checked = false;
+
+                int newState = std::stoi(workStack.top());
+
+                for (const auto &goTO: parsingTable[newState].second) {
+                    if (goTO.first == currProd.first) {
+                        checked = true;
+                        workStack.push(currProd.first);
+                        workStack.push(std::to_string(goTO.second));
+                        break;
+                    }
+                }
+
+                if (!checked) {
+                    std::cerr << "ERROR!! Input stack: ";
+                    for (int j = posInput; j < inputStack.size(); j++) {
+                        std::cerr << inputStack[j] << " ";
+                    }
+                    std::cerr << std::endl;
+                    std::vector<int> err;
+                    err.push_back(-1);
+                    return err;
+                }
 
             }
         }
     }
 
     //change from stack to vector
-    return std::vector<int>();
+    std::vector<int> resultVector;
+    while(!outputStack.empty()){
+        resultVector.push_back(outputStack.top());
+        outputStack.pop();
+    }
+
+
+    return resultVector;
 }

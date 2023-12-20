@@ -6,6 +6,12 @@
 #include "ParseOutput.h"
 
 void ParseOutput::populateTableFromProductionString(std::vector<int> productionString, Grammar grammar) {
+    if (productionString[0] == -1) {
+        std::cout << "Parsing incorrect | bad production string" << std::endl;
+        return;
+    }
+
+
     //put the starting symbol in the table
     Element aux;
     aux.info = grammar.startingSymbol;
