@@ -71,9 +71,9 @@ int main() {
                     break;
                 }
                 case 7: {
-//                    if (lr0.completeParsingTable(grammar))
-//                        lr0.printParsingTable();
-                    lr0.completeParsingTable(grammar);
+                    if (lr0.completeParsingTable(grammar))
+                        lr0.printParsingTable();
+//                    lr0.completeParsingTable(grammar);
 //                    lr0.printParsingTable();
                     break;
                 }

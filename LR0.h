@@ -24,6 +24,7 @@ private:
     std::map<int, std::pair<std::string, std::vector<std::pair<std::string, int>>>> parsingTable;
 
 
+
 public:
     std::map<std::string, std::vector<Production>>
     closure(const std::map<std::string, std::vector<Production>> &I, Grammar grammar);
@@ -53,7 +54,7 @@ public:
      * ori simbolul/productia ori ceva de acolo
      * basically trebuie implementat exact ce am facut la seminar si are si profa explicatii
      */
-    std::vector<int> parseSequence(Grammar grammar);
+    std::vector<int> parseSequence(std::vector<std::string> inputStack, Grammar grammar, CanonicalCollection collection);
 
 };
 

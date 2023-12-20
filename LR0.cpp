@@ -3,6 +3,8 @@
 //
 
 #include <algorithm>
+#include <stack>
+#include <cstring>
 #include "LR0.h"
 
 std::map<std::string, std::vector<Production>>
@@ -113,6 +115,7 @@ CanonicalCollection LR0::canonicalCollection(Grammar grammar) {
 std::string
 LR0::action(std::map<std::string, std::vector<Production>> state, Grammar grammar, int i) {
     std::string value = "";
+    std::vector<std::pair<std::string, Production>> numberedProductions = grammar.getNumberedProductions();
     for (const auto &currentNonterminal: state) {
         //parsing all items
         for (const auto &currentProduction: currentNonterminal.second) {
@@ -123,20 +126,14 @@ LR0::action(std::map<std::string, std::vector<Production>> state, Grammar gramma
                     value = REDUCE;
 
                     int count = 0;
-                    bool terminationFlag = false;
-                    for (const auto &item: grammar.productions) {
-                        for (const auto &production: item.second) {
-                            count++;
-                            if (currentNonterminal.first == item.first &&
-                                currentProduction.getTerms() == production.getTerms()) {
-                                terminationFlag = true;
-                                break;
-                            }
-                        }
-                        if (terminationFlag)
+                    for (int prod = 0; prod < numberedProductions.size(); prod++) {
+                        if (currentNonterminal.first == numberedProductions[prod].first &&
+                            currentProduction.getTerms() == numberedProductions[prod].second.getTerms()) {
+                            count = prod + 1;
                             break;
-
+                        }
                     }
+
                     value += " " + std::to_string(count);
                 } else if (value == SHIFT) {
                     std::cerr << "SHIFT REDUCE CONFLICT! State" << i << "- symbol:" << currentNonterminal.first
@@ -220,7 +217,61 @@ void LR0::printParsingTable() {
 
 }
 
-std::vector<int> LR0::parseSequence(Grammar grammar) {
+std::vector<int>
+LR0::parseSequence(std::vector<std::string> inputStack, Grammar grammar, CanonicalCollection collection) {
+    std::stack<std::string> workStack;
+    std::stack<int> outputStack;
+
+    //add initial state to work stack
+    workStack.emplace("0");
+    int posInput = 0;
+    bool end = false;
+    std::vector<std::pair<std::string, Production>> numberedProductions = grammar.getNumberedProductions();
+    while (!end) {
+        int state = std::stoi(workStack.top());
+        std::string action = parsingTable[state].first;
+        if (action == ACCEPT) {
+            end = true;
+            std::cout << "SEQUENCE ACCEPTED" << std::endl;
+            break;
+        } else {
+            if (action == SHIFT) {
+                std::string headInputStack = inputStack[posInput];
+                bool checked = false;
+                for (const auto &goTO: parsingTable[state].second) {
+                    if (goTO.first == headInputStack) {
+                        checked = true;
+                        workStack.push(headInputStack);
+                        workStack.push(std::to_string(goTO.second));
+                        break;
+                    }
+                }
+
+                if (!checked) {
+                    std::cerr << "ERROR!! Input stack: ";
+                    for (int j = posInput; j < inputStack.size(); j++) {
+                        std::cerr << inputStack[j] << " ";
+                    }
+                    std::cerr << std::endl;
+                    break;
+                }
+
+                posInput++;
+            } else {
+                //in the reduce case
+                //get the production number;
+                int productionNr = atoi(strchr(action.c_str(), ' ')+1);
+
+                outputStack.push(productionNr);
+
+                //popping stuff from the workstack
+
+
+
+            }
+        }
+    }
+
+    //change from stack to vector
     return std::vector<int>();
 }
-
