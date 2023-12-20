@@ -174,4 +174,14 @@ Grammar Grammar::createExpandedGrammar(std::string initialSymbol) {
     return newGrammar;
 }
 
+std::vector<std::pair<std::string, Production>> Grammar::getNumberedProductions() {
+    std::vector<std::pair<std::string, Production>> prods;
+    for (const auto &item: this->productions){
+        for (const auto &prod: item.second){
+            prods.emplace_back(item.first, prod);
+        }
+    }
+    return prods;
+}
+
 

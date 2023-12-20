@@ -87,7 +87,7 @@ CanonicalCollection LR0::canonicalCollection(Grammar grammar) {
             for (const auto &currentProduction: item) {
                 for (const auto &input: currentProduction.second) {
                     if (!input.isPointAtEnd() &&
-                        std::find(elements.begin(), elements.end(), input.getPointValue()) == elements.end() )
+                        std::find(elements.begin(), elements.end(), input.getPointValue()) == elements.end())
                         elements.push_back(input.getPointValue());
                 }
             }
@@ -139,14 +139,17 @@ LR0::action(std::map<std::string, std::vector<Production>> state, Grammar gramma
                     }
                     value += " " + std::to_string(count);
                 } else if (value == SHIFT) {
-                    std::cerr << "SHIFT REDUCE CONFLICT! State" << i << " " << std::endl;
+                    std::cerr << "SHIFT REDUCE CONFLICT! State" << i << "- symbol:" << currentNonterminal.first
+                              << std::endl;
                     value = "ERROR";
                 } else {
-                    std::cerr << "REDUCE REDUCE CONFLICT! State" << i << " " << std::endl;
+                    std::cerr << "REDUCE REDUCE CONFLICT! State" << i << "- symbol:" << currentNonterminal.first
+                              << std::endl;
                     value = "ERROR";
                 }
             } else if (value == REDUCE) {
-                std::cerr << "SHIFT REDUCE CONFLICT! State" << i << " " << std::endl;
+                std::cerr << "SHIFT REDUCE CONFLICT! State" << i << "- symbol:" << currentNonterminal.first
+                          << std::endl;
                 value = "ERROR";
             } else {
                 value = SHIFT;
@@ -179,8 +182,8 @@ bool LR0::completeParsingTable(Grammar grammar) {
     for (int i = 0; i < expandedGrammarCanonicalCollection.states.size(); i++) {
         auto state = expandedGrammarCanonicalCollection.states[i];
         std::string currentAction = action(state, expandedGrammar, i);
-//        if (currentAction == "ERROR")
-//            return false;
+        if (currentAction == "ERROR")
+            return false;
 
         this->parsingTable[i].first = currentAction;
         if (currentAction == SHIFT) {

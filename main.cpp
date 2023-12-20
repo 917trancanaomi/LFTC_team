@@ -2,6 +2,7 @@
 #include <limits>
 #include "Grammar.h"
 #include "LR0.h"
+#include "ParseOutput.h"
 
 void printCanonicalCollection(const CanonicalCollection &canonicalCollection) {
     const auto &states = canonicalCollection.getStates();
@@ -37,6 +38,7 @@ int main() {
         std::cout << "5: Check if CFG" << std::endl;
         std::cout << "6: Canonical collection" << std::endl;
         std::cout << "7: Create Parsing table" << std::endl;
+        std::cout << "8: Test ParseOutput with 133" << std::endl;
         std::cout << "Enter option: ";
 
         try {
@@ -74,6 +76,16 @@ int main() {
                     lr0.completeParsingTable(grammar);
 //                    lr0.printParsingTable();
                     break;
+                }
+                case 8: {
+                    ParseOutput parseOutput;
+                    std::vector<int> prods;
+                    prods.push_back(3);
+                    prods.push_back(1);
+                    prods.push_back(1);
+                    prods.push_back(2);
+                    parseOutput.populateTableFromProductionString(prods, grammar);
+                    std::cout << parseOutput << std::endl;
                 }
                 case 0:
                     std::cout << "Exiting..." << std::endl;

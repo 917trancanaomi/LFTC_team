@@ -35,6 +35,8 @@ public:
 
     Grammar createExpandedGrammar(std::string initialSymbol);
 
+    std::vector<std::pair<std::string, Production>> getNumberedProductions();
+
 
     std::string startingSymbol;
     std::set<std::string> nonterminals;
