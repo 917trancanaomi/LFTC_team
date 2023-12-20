@@ -37,7 +37,7 @@ void Production::incrementPoint() {
 }
 
 bool Production::isPointAtEnd() const {
-    return pointIndex == terms.size();
+    return pointIndex == terms.size() || terms[pointIndex] == EPSILON;
 }
 
 Production::Production(const Production &production) {
@@ -51,9 +51,12 @@ const std::vector<std::string> &Production::getTerms() const {
 
 std::ostream &operator<<(std::ostream &os, const Production &production) {
     for (int i = 0; i < production.terms.size(); i++) {
-        if (production.pointIndex == i)
-            os << ".";
-        os << production.terms[i];
+        if (production.terms[i] != EPSILON) {
+            if (production.pointIndex == i)
+                os << ".";
+            os << production.terms[i];
+        }
+
     }
     if (production.isPointAtEnd())
         os << ".";

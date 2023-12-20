@@ -44,8 +44,6 @@ public:
 private:
 
 
-    static const std::string EPSILON;
-
     void processNonterminals(std::ifstream &reader);
 
     void processTerminals(std::ifstream &reader);

@@ -87,7 +87,7 @@ CanonicalCollection LR0::canonicalCollection(Grammar grammar) {
             for (const auto &currentProduction: item) {
                 for (const auto &input: currentProduction.second) {
                     if (!input.isPointAtEnd() &&
-                        std::find(elements.begin(), elements.end(), input.getPointValue()) == elements.end())
+                        std::find(elements.begin(), elements.end(), input.getPointValue()) == elements.end() )
                         elements.push_back(input.getPointValue());
                 }
             }
@@ -179,8 +179,8 @@ bool LR0::completeParsingTable(Grammar grammar) {
     for (int i = 0; i < expandedGrammarCanonicalCollection.states.size(); i++) {
         auto state = expandedGrammarCanonicalCollection.states[i];
         std::string currentAction = action(state, expandedGrammar, i);
-        if (currentAction == "ERROR")
-            return false;
+//        if (currentAction == "ERROR")
+//            return false;
 
         this->parsingTable[i].first = currentAction;
         if (currentAction == SHIFT) {
@@ -189,7 +189,7 @@ bool LR0::completeParsingTable(Grammar grammar) {
             elements.clear();
             for (const auto &currentProduction: state) {
                 for (const auto &input: currentProduction.second) {
-                    if (!input.isPointAtEnd())
+                    if (!input.isPointAtEnd() && input != EPSILON)
                         elements.push_back(input.getPointValue());
                 }
             }

@@ -10,6 +10,8 @@
 #include <string>
 #include <ostream>
 
+const std::string EPSILON = "EPSILON";
+
 
 class Production {
     std::vector<std::string> terms;

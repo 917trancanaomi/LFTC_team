@@ -5,7 +5,6 @@
 #include "Grammar.h"
 #include "Utils.h"
 
-const std::string Grammar::EPSILON = "epsilon";
 
 Grammar::Grammar() = default;
 
@@ -134,9 +133,8 @@ void Grammar::processProductions(std::ifstream &reader) {
         std::istringstream productionsStream(productionsStr);
         std::string production;
         while (std::getline(productionsStream, production, '|')) {
+            std::cout<<production<<std::endl;
             production = Utils::trim(production);
-            if (production == "")
-                production = EPSILON;
             Production aux(production);
             productionSymbols.push_back(aux);
         }
