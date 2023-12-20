@@ -161,4 +161,5 @@ CMakeFiles/LFTC_team.dir/main.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/vector.tcc \
  D:\UniversityWork\LFTC_team\Production.h \
  D:\UniversityWork\LFTC_team\LR0.h \
- D:\UniversityWork\LFTC_team\CanonicalCollection.h
+ D:\UniversityWork\LFTC_team\CanonicalCollection.h \
+ D:\UniversityWork\LFTC_team\ParseOutput.h
