@@ -25,7 +25,7 @@ void printCanonicalCollection(const CanonicalCollection &canonicalCollection) {
 
 int main() {
     Grammar grammar;
-    grammar.readFromFile("D:\\UniversityWork\\LFTC_team\\ga.txt");
+    grammar.readFromFile("C:\\Users\\Naomi\\Desktop\\University Year 3\\lftc\\LFTC_team\\g3.txt");
 
     int opt = -1;
     while (opt != 0) {
@@ -39,6 +39,7 @@ int main() {
         std::cout << "6: Canonical collection" << std::endl;
         std::cout << "7: Create Parsing table" << std::endl;
         std::cout << "8: Test ParseOutput with 133" << std::endl;
+        std::cout << "10: Read Grammar and Sequence from File and User Input" << std::endl;
         std::cout << "Enter option: ";
 
         try {
@@ -78,14 +79,43 @@ int main() {
                     break;
                 }
                 case 8: {
+                    std::vector<std::string> inputSequence = {"a", "b", "b", "c"};
+                    //Parse the input sequence
+                    std::vector<int> parseResult = lr0.parseSequence(grammar, inputSequence);
+
+                    // Print the result of parsing
+                    std::cout << "Parsing result: ";
+                    for (int result: parseResult) {
+                        if (result == -1) {
+                            std::cout << "Error";
+                        } else {
+                            std::cout << "Production " << result << " ";
+                        }
+                    }
+                    std::cout << std::endl;
+                    // Generate parse table using ParseOutput
                     ParseOutput parseOutput;
-                    std::vector<int> prods;
-                    prods.push_back(3);
-                    prods.push_back(1);
-                    prods.push_back(1);
-                    prods.push_back(2);
-                    parseOutput.populateTableFromProductionString(prods, grammar);
+                    parseOutput.populateTableFromProductionString(parseResult, grammar);
                     std::cout << parseOutput << std::endl;
+                }
+                case 9: {
+                    std::vector<std::string> inputSequence = {"a", "b", "b", "c"};
+
+                    lr0.completeParsingTable(grammar);
+                    // Parse the input sequence
+                    std::vector<int> parseResult = lr0.parseSequence(grammar, inputSequence);
+
+                    // Print the result of parsing
+                    std::cout << "Parsing result: ";
+                    for (int result: parseResult) {
+                        if (result == -1) {
+                            std::cout << "Error";
+                        } else {
+                            std::cout << "Production " << result << " ";
+                        }
+                    }
+                    std::cout << std::endl;
+                    break;
                 }
                 case 0:
                     std::cout << "Exiting..." << std::endl;
@@ -94,6 +124,7 @@ int main() {
                     std::cout << "Invalid option" << std::endl;
                     break;
             }
+
         } catch (const std::exception &e) {
             std::cerr << "Exception: " << e.what() << std::endl;
         }

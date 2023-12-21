@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include "LR0.h"
+#include <stack>
 
 std::map<std::string, std::vector<Production>>
 LR0::closure(const std::map<std::string, std::vector<Production>> &I, Grammar grammar) {
@@ -156,6 +157,7 @@ LR0::action(std::map<std::string, std::vector<Production>> state, Grammar gramma
             }
         }
     }
+    std::cout << "Action value: " << value << std::endl;
     return value;
 }
 
@@ -220,7 +222,64 @@ void LR0::printParsingTable() {
 
 }
 
-std::vector<int> LR0::parseSequence(Grammar grammar) {
-    return std::vector<int>();
-}
+std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence) {
+    std::vector<int> result;  // This vector will store the productions used for parsing
 
+    std::stack<int> stateStack;
+    std::stack<std::string> inputStack;
+
+    stateStack.push(0);  // Initial state
+    inputStack.push("$");  // Bottom of stack marker
+
+    int inputIndex = 0;
+
+    while (true) {
+        // Get the current state and input symbol
+        int currentState = stateStack.top();
+        std::string currentSymbol = (inputIndex < inputSequence.size()) ? inputSequence[inputIndex] : "$";
+
+        // Get the action for the current state and symbol from the parsing table
+        std::string currentAction = action(canonicalCollection(grammar).states[currentState], grammar, currentState);
+
+        // Perform the action based on its type
+        if (currentAction == SHIFT) {
+            // Shift action
+            stateStack.push(goToNextState(canonicalCollection(grammar), canonicalCollection(grammar).states[currentState], grammar, currentSymbol));
+            inputStack.push(currentSymbol);
+            inputIndex++;
+        } else if (currentAction == REDUCE) {
+            // Reduce action
+            std::vector<Production> production = grammar.productions[currentSymbol];
+            int productionIndex = std::stoi(currentSymbol);
+
+            // Pop the symbols and states from the stacks based on the length of the production
+            for (int i = 0; i < production[productionIndex].getTerms().size(); ++i) {
+                stateStack.pop();
+                inputStack.pop();
+            }
+
+            // Push the non-terminal of the production onto the input stack
+            inputStack.push(production[productionIndex].getPointValue());
+
+            // Get the GOTO entry for the non-terminal
+            int newState = goToNextState(canonicalCollection(grammar), canonicalCollection(grammar).states[stateStack.top()], grammar, production[productionIndex].getPointValue());
+
+            // Push the new state onto the state stack
+            stateStack.push(newState);
+
+            // Store the production used for parsing
+            result.push_back(productionIndex);
+        } else if (currentAction == ACCEPT) {
+            // Accept action, parsing successful
+            result.push_back(-2);  // Marker for successful parsing
+            break;
+        } else {
+            // Error, unexpected action
+            std::cerr << "Error at position " << inputIndex << ": Unexpected action " << currentAction << std::endl;
+            result.push_back(-1);  // Marker for parsing error
+            break;
+        }
+    }
+
+    return result;
+}
