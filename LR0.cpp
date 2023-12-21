@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "LR0.h"
 #include <stack>
+#include <cstring>
 
 std::map<std::string, std::vector<Production>>
 LR0::closure(const std::map<std::string, std::vector<Production>> &I, Grammar grammar) {
@@ -222,64 +223,105 @@ void LR0::printParsingTable() {
 
 }
 
-std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence) {
-    std::vector<int> result;  // This vector will store the productions used for parsing
-
-    std::stack<int> stateStack;
+std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence, std::vector<int> &outputStack, CanonicalCollection collection) {
     std::stack<std::string> inputStack;
+    std::stack<int> internalStack;
 
-    stateStack.push(0);  // Initial state
-    inputStack.push("$");  // Bottom of stack marker
-
+    // Add initial state to the input stack
+    inputStack.emplace("0");
     int inputIndex = 0;
+    bool end = false;
+    std::vector<std::pair<std::string, Production>> numberedProductions = grammar.getNumberedProductions();
 
-    while (true) {
-        // Get the current state and input symbol
-        int currentState = stateStack.top();
-        std::string currentSymbol = (inputIndex < inputSequence.size()) ? inputSequence[inputIndex] : "$";
+    while (!end) {
+        int state = std::stoi(inputStack.top());
+        std::string action = parsingTable[state].first;
 
-        // Get the action for the current state and symbol from the parsing table
-        std::string currentAction = action(canonicalCollection(grammar).states[currentState], grammar, currentState);
-
-        // Perform the action based on its type
-        if (currentAction == SHIFT) {
-            // Shift action
-            stateStack.push(goToNextState(canonicalCollection(grammar), canonicalCollection(grammar).states[currentState], grammar, currentSymbol));
-            inputStack.push(currentSymbol);
-            inputIndex++;
-        } else if (currentAction == REDUCE) {
-            // Reduce action
-            std::vector<Production> production = grammar.productions[currentSymbol];
-            int productionIndex = std::stoi(currentSymbol);
-
-            // Pop the symbols and states from the stacks based on the length of the production
-            for (int i = 0; i < production[productionIndex].getTerms().size(); ++i) {
-                stateStack.pop();
-                inputStack.pop();
-            }
-
-            // Push the non-terminal of the production onto the input stack
-            inputStack.push(production[productionIndex].getPointValue());
-
-            // Get the GOTO entry for the non-terminal
-            int newState = goToNextState(canonicalCollection(grammar), canonicalCollection(grammar).states[stateStack.top()], grammar, production[productionIndex].getPointValue());
-
-            // Push the new state onto the state stack
-            stateStack.push(newState);
-
-            // Store the production used for parsing
-            result.push_back(productionIndex);
-        } else if (currentAction == ACCEPT) {
-            // Accept action, parsing successful
-            result.push_back(-2);  // Marker for successful parsing
+        if (action == ACCEPT) {
+            end = true;
+            std::cout << "SEQUENCE ACCEPTED" << std::endl;
             break;
         } else {
-            // Error, unexpected action
-            std::cerr << "Error at position " << inputIndex << ": Unexpected action " << currentAction << std::endl;
-            result.push_back(-1);  // Marker for parsing error
-            break;
+            if (action == SHIFT) {
+                std::string currentInputSymbol = inputSequence[inputIndex];
+                bool foundTransition = false;
+
+                for (const auto &transition : parsingTable[state].second) {
+                    if (transition.first == currentInputSymbol) {
+                        foundTransition = true;
+                        inputStack.push(currentInputSymbol);
+                        inputStack.push(std::to_string(transition.second));
+                        break;
+                    }
+                }
+
+                if (!foundTransition) {
+                    std::cerr << "ERROR!! Remaining input stack: ";
+                    for (int j = inputIndex; j < inputSequence.size(); j++) {
+                        std::cerr << inputSequence[j] << " ";
+                    }
+                    std::cerr << std::endl;
+
+                    std::vector<int> errorResult;
+                    errorResult.push_back(-1);
+                    return errorResult;
+                }
+
+                inputIndex++;
+            } else {
+                // In the reduce case
+                // Get the production number
+                int productionNumber = atoi(strchr(action.c_str(), ' ') + 1);
+
+                outputStack.push_back(productionNumber);
+
+                // Pop items from the input stack
+                auto currentProduction = numberedProductions[productionNumber - 1];
+                auto production = currentProduction.second;
+
+                for (int j = production.getTerms().size() - 1; j >= 0; j--) {
+                    // Pop the state
+                    inputStack.pop();
+                    // Pop the element
+                    inputStack.pop();
+                }
+
+                bool foundTransition = false;
+                int newState = std::stoi(inputStack.top());
+
+                for (const auto &transition : parsingTable[newState].second) {
+                    if (transition.first == currentProduction.first) {
+                        foundTransition = true;
+                        inputStack.push(currentProduction.first);
+                        inputStack.push(std::to_string(transition.second));
+                        break;
+                    }
+                }
+
+                if (!foundTransition) {
+                    std::cerr << "ERROR!! Remaining input stack: ";
+                    for (int j = inputIndex; j < inputSequence.size(); j++) {
+                        std::cerr << inputSequence[j] << " ";
+                    }
+                    std::cerr << std::endl;
+
+                    std::vector<int> errorResult;
+                    errorResult.push_back(-1);
+                    return errorResult;
+                }
+            }
         }
     }
 
-    return result;
+    // Change from stack-like operations to vector operations
+    std::vector<int> resultVector;
+    while (!outputStack.empty()) {
+        resultVector.push_back(outputStack.back());
+        outputStack.pop_back();
+    }
+
+    // Reverse the resultVector to maintain the correct order
+    std::reverse(resultVector.begin(), resultVector.end());
+
+    return resultVector;
 }

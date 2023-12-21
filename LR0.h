@@ -22,7 +22,7 @@ private:
     // value = pair<action, goto>
     // action = shift | reduce | accept
     // goto = vector<pair<element, state_number>>
-   std::map<int, std::pair<std::string, std::vector<std::pair<std::string, int>>>> parsingTable;
+    std::map<int, std::pair<std::string, std::vector<std::pair<std::string, int>>>> parsingTable;
 
 public:
     std::map<std::string, std::vector<Production>>
@@ -53,7 +53,7 @@ public:
      * ori simbolul/productia ori ceva de acolo
      * basically trebuie implementat exact ce am facut la seminar si are si profa explicatii
      */
-    std::vector<int> parseSequence(Grammar& grammar, const std::vector<std::string>& inputSequence);
+    std::vector<int> parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence, std::vector<int>& outputStack, CanonicalCollection collection);
 };
 
 

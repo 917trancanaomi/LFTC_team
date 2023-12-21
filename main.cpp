@@ -39,7 +39,7 @@ int main() {
         std::cout << "6: Canonical collection" << std::endl;
         std::cout << "7: Create Parsing table" << std::endl;
         std::cout << "8: Test ParseOutput with 133" << std::endl;
-        std::cout << "10: Read Grammar and Sequence from File and User Input" << std::endl;
+        std::cout << "9: Read Grammar and Sequence from File and User Input" << std::endl;
         std::cout << "Enter option: ";
 
         try {
@@ -79,43 +79,33 @@ int main() {
                     break;
                 }
                 case 8: {
-                    std::vector<std::string> inputSequence = {"a", "b", "b", "c"};
-                    //Parse the input sequence
-                    std::vector<int> parseResult = lr0.parseSequence(grammar, inputSequence);
-
-                    // Print the result of parsing
-                    std::cout << "Parsing result: ";
-                    for (int result: parseResult) {
-                        if (result == -1) {
-                            std::cout << "Error";
-                        } else {
-                            std::cout << "Production " << result << " ";
-                        }
-                    }
-                    std::cout << std::endl;
-                    // Generate parse table using ParseOutput
                     ParseOutput parseOutput;
-                    parseOutput.populateTableFromProductionString(parseResult, grammar);
+                    std::vector<int> prods;
+                    prods.push_back(3);
+                    prods.push_back(1);
+                    prods.push_back(1);
+                    prods.push_back(2);
+                    parseOutput.populateTableFromProductionString(prods, grammar);
                     std::cout << parseOutput << std::endl;
                 }
                 case 9: {
-                    std::vector<std::string> inputSequence = {"a", "b", "b", "c"};
-
+                    std::vector<std::string> inputSequence;
+                    std::vector<int> outputStack;
+                    inputSequence.emplace_back("a");
+                    inputSequence.emplace_back("b");
+                    inputSequence.emplace_back("b");
+                    inputSequence.emplace_back("c");
+                    Grammar expandedGrammar = grammar.createExpandedGrammar(grammar.startingSymbol + "PRIME");
+                    CanonicalCollection collection = lr0.canonicalCollection(expandedGrammar);
                     lr0.completeParsingTable(grammar);
-                    // Parse the input sequence
-                    std::vector<int> parseResult = lr0.parseSequence(grammar, inputSequence);
-
-                    // Print the result of parsing
-                    std::cout << "Parsing result: ";
-                    for (int result: parseResult) {
-                        if (result == -1) {
-                            std::cout << "Error";
-                        } else {
-                            std::cout << "Production " << result << " ";
-                        }
+                    std::vector<int> result = lr0.parseSequence(expandedGrammar, inputSequence, outputStack, collection);
+                    for (const auto &item : outputStack){
+                        std::cout<<item<<" ";
                     }
-                    std::cout << std::endl;
-                    break;
+                    std::cout<<"\n";
+                    ParseOutput parseOutput;
+                    parseOutput.populateTableFromProductionString(result, grammar);
+                    std::cout << parseOutput << std::endl;
                 }
                 case 0:
                     std::cout << "Exiting..." << std::endl;
