@@ -223,9 +223,10 @@ void LR0::printParsingTable() {
 
 }
 
-std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence, std::vector<int> &outputStack, CanonicalCollection collection) {
+std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence, CanonicalCollection collection) {
     std::stack<std::string> inputStack;
-    std::stack<int> internalStack;
+    std::stack<int> workStack;
+    std::stack<int> outputStack;
 
     // Add initial state to the input stack
     inputStack.emplace("0");
@@ -273,7 +274,7 @@ std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::str
                 // Get the production number
                 int productionNumber = atoi(strchr(action.c_str(), ' ') + 1);
 
-                outputStack.push_back(productionNumber);
+                outputStack.push(productionNumber);
 
                 // Pop items from the input stack
                 auto currentProduction = numberedProductions[productionNumber - 1];
@@ -316,12 +317,9 @@ std::vector<int> LR0::parseSequence(Grammar &grammar, const std::vector<std::str
     // Change from stack-like operations to vector operations
     std::vector<int> resultVector;
     while (!outputStack.empty()) {
-        resultVector.push_back(outputStack.back());
-        outputStack.pop_back();
+        resultVector.push_back(outputStack.top());
+        outputStack.pop();
     }
-
-    // Reverse the resultVector to maintain the correct order
-    std::reverse(resultVector.begin(), resultVector.end());
 
     return resultVector;
 }

@@ -90,7 +90,6 @@ int main() {
                 }
                 case 9: {
                     std::vector<std::string> inputSequence;
-                    std::vector<int> outputStack;
                     inputSequence.emplace_back("a");
                     inputSequence.emplace_back("b");
                     inputSequence.emplace_back("b");
@@ -98,8 +97,8 @@ int main() {
                     Grammar expandedGrammar = grammar.createExpandedGrammar(grammar.startingSymbol + "PRIME");
                     CanonicalCollection collection = lr0.canonicalCollection(expandedGrammar);
                     lr0.completeParsingTable(grammar);
-                    std::vector<int> result = lr0.parseSequence(expandedGrammar, inputSequence, outputStack, collection);
-                    for (const auto &item : outputStack){
+                    std::vector<int> result = lr0.parseSequence(expandedGrammar, inputSequence, collection);
+                    for (const auto &item : result){
                         std::cout<<item<<" ";
                     }
                     std::cout<<"\n";

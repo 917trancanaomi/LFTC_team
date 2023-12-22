@@ -53,7 +53,7 @@ public:
      * ori simbolul/productia ori ceva de acolo
      * basically trebuie implementat exact ce am facut la seminar si are si profa explicatii
      */
-    std::vector<int> parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence, std::vector<int>& outputStack, CanonicalCollection collection);
+    std::vector<int> parseSequence(Grammar &grammar, const std::vector<std::string> &inputSequence, CanonicalCollection collection);
 };
 
 
