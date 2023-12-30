@@ -3,6 +3,8 @@
 //
 
 #include <queue>
+#include <stack>
+#include <iomanip>
 #include "ParseOutput.h"
 
 void ParseOutput::populateTableFromProductionString(std::vector<int> productionString, Grammar grammar) {
@@ -14,20 +16,24 @@ void ParseOutput::populateTableFromProductionString(std::vector<int> productionS
     table.push_back(aux);
     //parse all the productions
     std::vector<std::pair<std::string, Production>> productionsNumbered = grammar.getNumberedProductions();
-    std::queue<int> nonterminalIndexQueue;
+    std::deque<int> nonterminalIndexDeque;
+
     int currentPosition = 0;
 
-    nonterminalIndexQueue.push(currentPosition);
+    nonterminalIndexDeque.push_back(currentPosition);
+
 
     for (int i = 0; i < productionString.size(); i++) {
         Production currentProduction = productionsNumbered[productionString[i] - 1].second;
         auto terms = currentProduction.getTerms();
+        int parent = nonterminalIndexDeque.back();
+        std::vector<int> aux;
         for (int j = 0; j < terms.size(); j++) {
             currentPosition++;
 
             Element newterm;
             newterm.info = terms[j];
-            newterm.parent = nonterminalIndexQueue.front();
+            newterm.parent = parent;
             if (j == 0)
                 newterm.rightSibling = -1;
             else
@@ -37,20 +43,21 @@ void ParseOutput::populateTableFromProductionString(std::vector<int> productionS
 
             //check for nonterminal to add to queue
             if (grammar.nonterminals.find(terms[j]) != grammar.nonterminals.end())
-                nonterminalIndexQueue.push(currentPosition);
-
+                aux.push_back(currentPosition);
         }
-        nonterminalIndexQueue.pop();
+        nonterminalIndexDeque.pop_back();
+        for (const auto &item: aux)
+            nonterminalIndexDeque.push_back(item);
     }
 }
 
 
 std::ostream &operator<<(std::ostream &os, const ParseOutput &output) {
     os << "Parent-sibling table: \n";
-    os << " INDEX  " << " | " << "  INFO  " << " | " << " PARENT " << " | " << "RIGHT SIBLING\n";
+    os << std::left << std::setw(7) << "INDEX" << " | " << std::setw(40) << "INFO" << " | " << std::setw(7) << "PARENT" << " | " << "RIGHT SIBLING\n";
     for (int i = 0; i < output.table.size(); i++) {
         Element el = output.table[i];
-        os << i << "         | " << el.info << "         | " << el.parent << "         | " << el.rightSibling << "\n";
+        os << std::left << std::setw(7) << i << " | " << std::setw(40) << el.info << " | " << std::setw(7) << el.parent << " | " << el.rightSibling << "\n";
     }
     return os;
 }

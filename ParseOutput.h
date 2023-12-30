@@ -20,9 +20,9 @@ class ParseOutput {
 public:
     friend std::ostream &operator<<(std::ostream &os, const ParseOutput &output);
 
-    std::vector<Element> table;
-
     void populateTableFromProductionString(std::vector<int> productionString, Grammar grammar) ;
+
+    std::vector<Element> table;
 
 
 };

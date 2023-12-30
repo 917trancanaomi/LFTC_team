@@ -1,41 +1,9 @@
-program statement_list statement statement_simple iostatement input_statement output_statement declaration_statement type type_basic array array_accessing key assignment_statement variable expression operator add_or_substract multiply_or_divide term factor if_statement while_statement condition relation letter digit nonzerodigit integer string character constant_string constant_character number sequence_of_digits sequence_of_characters identifier statement_structured
-A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 + - * / % < > <= >= = [ ] ( ) { } : ; , ' " int char string IF scanf printf WHILE BEGIN END
+program statement_list declaration_statement assignment_statement type output_statement
+begin end ; id int = const + printf ( )
 program
-program -> BEGIN statement_list END
-statement_list -> statement ; | statement_list ; statement_list
-statement -> statement_simple | statement_structured
-statement_structured -> if_statement | while_statement
-statement_simple -> declaration_statement | assignment_statement | iostatement
-iostatement -> input_statement | output_statement
-input_statement -> scanf ( variable )
-output_statement -> printf ( expression )
-declaration_statement -> type identifier
-type -> type_basic | array
-type_basic -> char | int | string
-array -> type_basic [ number ]
-array_accessing -> identifier [ key ]
-key -> number | identifier
-assignment_statement -> variable = expression
-variable -> identifier | array_accessing
-identifier -> letter |  sequence_of_characters sequence_of_characters
-expression -> term operator expression | term
-operator -> add_or_substract | multiply_or_divide
-add_or_substract -> + | -
-multiply_or_divide -> * | / | %
-term -> factor operator term | factor
-factor  -> variable | integer | ( expression )
-if_statement  -> IF ( condition ) { statement_list }
-while_statement  -> WHILE ( condition ) { statement_list }
-condition  -> expression relation expression
-relation  -> < | > | >= | <=
-letter -> A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
-nonzerodigit -> 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-digit -> 0 | nonzerodigit
-sequence_of_digits -> digit | sequence_of_digits sequence_of_digits
-number -> nonzerodigit | nonzerodigit sequence_of_digits
-integer -> 0 | + number | - number
-string -> character | string string
-character -> letter | digit
-constant_string -> " string "
-constant_character -> ' character '
-sequence_of_characters -> character | sequence_of_characters sequence_of_characters
+program -> begin statement_list end
+statement_list -> declaration_statement ; assignment_statement ; output_statement ;
+declaration_statement -> type id
+type -> int
+assignment_statement -> id = const + const
+output_statement -> printf ( id )

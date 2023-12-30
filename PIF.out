@@ -1,0 +1,17 @@
+token | position
+begin -1
+int -1
+id 97
+; -1
+id 97
+= -1
+const 50
++ -1
+const 52
+; -1
+printf -1
+( -1
+id 97
+) -1
+; -1
+end -1
