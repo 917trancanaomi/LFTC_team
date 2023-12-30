@@ -158,7 +158,7 @@ LR0::action(std::map<std::string, std::vector<Production>> state, Grammar gramma
             }
         }
     }
-    std::cout << "Action value: " << value << std::endl;
+//    std::cout << "Action value: " << value << std::endl;
     return value;
 }
 
