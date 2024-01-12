@@ -1,0 +1,78 @@
+@startuml
+
+class Production {
+    - vector<string> terms
+    - int pointIndex
+    + vector<string> getTerms()
+    + string toString()
+    + string getPointValue()
+    + void incrementPoint()
+    + bool isPointAtEnd()
+}
+
+class Grammar{
+    + string startingSymbol
+    + set<string> nonterminals
+    + set<string> terminals
+    + std::map<string, vector<Production>> productions
+    + void readFile(string fileName)
+    + void printNonterminals()
+    + void printTerminals()
+    + void printProductions()
+    + void productionsFotSpecificNonterminal(string nonterminal)
+    + bool checkIfCFG()
+    + vector<Production> getProductionsForNonterminal(string nonterminal)
+    + Grammar createExpandedGrammar(string initialSymbol)
+    + vector<pair<string, Production>> getNumberedProductions()
+    - void processNonterminals()
+    - void processTerminals()
+    - void processProductions()
+    - void processInitialState()
+}
+
+
+
+struct Element{
+    + string info
+    + int parent
+    + int rightSibling
+}
+
+class ParseOutput{
+    + vector<Element> table
+    + populateTableFromProductionString(vector<int> productionString, Grammar grammar)
+}
+
+
+
+
+
+class CanonicalCollection{
+    + vector<map<string, vector<Production>>> states
+    + void addState(map<string, vector<Production>> state)
+    + bool stateExists(map<string, vector<Production>> state)
+}
+
+class LR0{
+    - map<int, pair<string, vector<pair<string, int>>>> parsingTable
+    + map<string, vector<Production>> closure(map<string, vector<Production>> I, Grammar grammar)
+    + map<string, vector<Production>> goTo(map<string, vector<Production>> I, Grammar grammar, string X)
+    + CanonicalCollection canonicalCollection(Grammar grammar)
+    + string action(map<string, vector<Production>> state, Grammar grammar, int i)
+    + int goToNextState(CanonicalCollection canonicalCollection, map<string, vector<Production>> state, Grammar grammar, string element)
+    + bool completeParsingTable(Grammar grammar)
+    + vector<int> parseSequence(Grammar grammar, vector<string> inputSequence, CanonicalCollection canonicalCollection)
+}
+CanonicalCollection --* LR0 : uses
+ParseOutput o-- Element : contains
+Grammar o-- Production : has
+
+class Utils{
+    + vector<string> splitString(string str, char delimiter)
+    + set<string> splitStringToSet(string str, char delimiter)
+    + string trim(string str)
+    + void printSet(set<string> set)
+}
+
+
+@enduml
