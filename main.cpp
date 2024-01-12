@@ -27,7 +27,7 @@ void printCanonicalCollection(const CanonicalCollection &canonicalCollection) {
 std::vector<std::string> readInputSequenceFromPIF(std::string pifFile) {
     std::ifstream ifstream(pifFile);
     if (!ifstream.is_open()) {
-        std::cerr << "PIF File could not be open" << std::endl;
+        std::cerr << "PIF File could not be opened" << std::endl;
         return {};
     }
 
@@ -78,6 +78,53 @@ void PIFParsing() {
     ofstream << parseOutput << std::endl;
 }
 
+std::vector<std::string> readInputSequenceFromNormalFile(std::string filepath){
+    std::ifstream ifstream(filepath);
+    if (!ifstream.is_open()) {
+        std::cerr << "Normal File could not be opened" << std::endl;
+        return {};
+    }
+
+    std::vector<std::string> inputSequence;
+    char value[100];
+    ifstream.getline(value, 100);
+
+    for (int i = 0; i< strlen(value); i++){
+        std::string str;
+        str.push_back(value[i]);
+        inputSequence.push_back(str);
+    }
+
+    return inputSequence;
+}
+
+
+void NORMALParsing() {
+    std::string toyLanguageGrammar = "D:\\UniversityWork\\LFTC_team\\ga.txt";
+    std::string pifInputFile = "D:\\UniversityWork\\LFTC_team\\inputNormal.in";
+
+    Grammar grammar;
+    grammar.readFromFile(toyLanguageGrammar);
+    Grammar expandedGrammar = grammar.createExpandedGrammar(grammar.startingSymbol + "PRIME");
+    LR0 lr0;
+    CanonicalCollection canonicalCollection = lr0.canonicalCollection(expandedGrammar);
+    lr0.completeParsingTable(grammar);
+//    lr0.printParsingTable();
+
+    std::vector<std::string> inputSequence = readInputSequenceFromNormalFile(pifInputFile);
+
+    std::vector<int> result = lr0.parseSequence(expandedGrammar, inputSequence, canonicalCollection);
+
+    for (const auto &item: result) {
+        std::cout << item << " ";
+    }
+    std::cout << "\n";
+    ParseOutput parseOutput;
+    parseOutput.populateTableFromProductionString(result, expandedGrammar);
+    std::cout << parseOutput << std::endl;
+    std::ofstream ofstream("D:\\UniversityWork\\LFTC_team\\out2.txt");
+    ofstream << parseOutput << std::endl;
+}
 
 int main() {
     Grammar grammar;
@@ -93,6 +140,7 @@ int main() {
         std::cout << "4: List productions for a given nonterminal" << std::endl;
         std::cout << "5: Check if CFG" << std::endl;
         std::cout << "6: Parse PIF.out with toy language grammar" << std::endl;
+        std::cout << "7: Parse inputNormal.in with seminar grammar" << std::endl;
         std::cout << "Enter option: ";
 
         try {
@@ -120,6 +168,10 @@ int main() {
                     break;
                 case 6: {
                     PIFParsing();
+                    break;
+                }
+                case 7: {
+                    NORMALParsing();
                     break;
                 }
 //                case 7: {
